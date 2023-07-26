@@ -372,16 +372,15 @@ void RDMA::listen(Flags flags) {
             throw std::runtime_error("Unexpected ai_family");
         }
         freeaddrinfo(res);
-
-        std::cout << "Binding to: ========== " << &addr << "\n";
-        std::cout << "Binding to: ========== " << addr << "\n";
-
+        
         ensure(local_port != 0);
         if (addr.ss_family == AF_INET) {
             ((struct sockaddr_in*)&addr)->sin_port = htons(local_port);
         } else {
             ((struct sockaddr_in6*)&addr)->sin6_port = htons(local_port);
         }
+
+        std::cout<<"local_port: " <<local_port<< "\n";
 
         check_ret(rdma_bind_addr(id, (struct sockaddr*)&addr));
     }
