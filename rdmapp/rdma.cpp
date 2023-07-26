@@ -380,6 +380,9 @@ void RDMA::listen(Flags flags) {
             ((struct sockaddr_in6*)&addr)->sin6_port = htons(local_port);
         }
 
+        std::cout << "Binding to: ========== " << &addr << "\n";
+        std::cout << "Binding to: ========== " << addr << "\n";
+
         check_ret(rdma_bind_addr(id, (struct sockaddr*)&addr));
     }
 
